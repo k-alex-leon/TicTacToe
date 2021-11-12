@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center|top"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/txtVPlayer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Player 1" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/triqui"/>
+
+            <TextView
+                android:id="@+id/txtVPlayer2"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:text="Player 2"/>
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgV0"
+                android:tag="0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+            <ImageView
+                android:id="@+id/imgV1"
+                android:tag="1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+            <ImageView
+                android:id="@+id/imgV2"
+                android:tag="2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgV3"
+                android:tag="3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+            <ImageView
+                android:id="@+id/imgV4"
+                android:tag="4"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+            <ImageView
+                android:id="@+id/imgV5"
+                android:tag="5"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgV6"
+                android:tag="6"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                android:padding="0dp"
+                tools:ignore="UsingOnClickInXml" />
+
+            <ImageView
+                android:id="@+id/imgV7"
+                android:tag="7"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+            <ImageView
+                android:id="@+id/imgV8"
+                android:tag="8"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_square"
+                android:onClick="cellClicked"
+                tools:ignore="UsingOnClickInXml"
+                android:padding="0dp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/nav_host_fragment_content_game"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
