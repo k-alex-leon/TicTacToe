@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green">#237710</color>
-    <color name="lightGreen">#2D7520</color>
-    <color name="darkGreen">#075108</color>
-    <color name="lightBlue">#FF03DAC5</color>
+    <color name="green">#2BB1AB</color>
+    <color name="lightGreen">#47C5BF</color>
+    <color name="darkGreen">#1CA37E</color>
+    <color name="lightBlue">#468AC5</color>
+    <color name="blue">#2D78B1</color>
     <color name="gray">#A1A3A3</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

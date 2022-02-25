@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -47,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         int width = metrics.widthPixels;
         int heigth = metrics.heightPixels;
         getWindow().setLayout((int)(width * 0.9), (int)(heigth*0.8));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //providers
         mUsersProvider = new UsersProvider();

@@ -8,6 +8,7 @@ public class Move {
     private String Gamer1id;
     private String Gamer2id;
     private String idWinner;
+    private String idLoser;
     private List<Integer> selectCells;
     private Boolean gameTurn;
     private long timestamp;
@@ -20,13 +21,14 @@ public class Move {
     //constructor para jugador en busca de partida
 
 
-    public Move(String idMove, String gamer1id, String gamer2id, String idWinner,
+    public Move(String idGame, String gamer1id, String gamer2id, String idWinner, String idLoser,
                 List<Integer> selectCells, Boolean gameTurn, long timestamp, String idExitGame) {
 
-        this.idGame = idMove;
+        this.idGame = idGame;
         Gamer1id = gamer1id;
         Gamer2id = gamer2id;
         this.idWinner = idWinner;
+        this.idLoser = idLoser;
         this.selectCells = selectCells;
         this.gameTurn = gameTurn;
         this.timestamp = timestamp;
@@ -63,6 +65,14 @@ public class Move {
 
     public void setIdWinner(String idWinner) {
         this.idWinner = idWinner;
+    }
+
+    public String getIdLoser() {
+        return idLoser;
+    }
+
+    public void setIdLoser(String idLoser) {
+        this.idLoser = idLoser;
     }
 
     public List<Integer> getSelectCells() {

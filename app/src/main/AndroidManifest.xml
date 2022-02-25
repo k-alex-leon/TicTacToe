@@ -13,9 +13,11 @@
             android:name=".activity.GameActivity"
             android:exported="true"
             android:label="@string/title_activity_game"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.TicTacToe.NoActionBar" />
         <activity
             android:name=".activity.FindGameActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activity.RegisterActivity"
@@ -26,7 +28,6 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

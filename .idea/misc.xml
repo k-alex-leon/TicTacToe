@@ -3,18 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/custom_popup.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_arrow_go_back_white.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_close.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_face.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_face_white.xml" value="0.19895833333333332" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_game_asset.xml" value="0.21666666666666667" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_list_score.xml" value="0.21666666666666667" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_logout.xml" value="0.21666666666666667" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/drawable/ic_refresh.xml" value="0.19895833333333332" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/activity_find_game.xml" value="0.20052083333333334" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/activity_game.xml" value="0.20052083333333334" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/activity_login.xml" value="0.20052083333333334" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/activity_register.xml" value="0.1828125" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/cardview_game.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/content_game.xml" value="0.20052083333333334" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/fragment_first.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/fragment_second.xml" value="0.20052083333333334" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/gameover_dialog.xml" value="0.20052083333333334" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/list_games_dialog.xml" value="0.1828125" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/looking_game_dialog.xml" value="0.1828125" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/layout/toolbar.xml" value="0.20052083333333334" />
         <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/menu/menu.xml" value="0.20052083333333334" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidProjects/TicTacToe/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TicTacToe/app/src/main/res/drawable/custom_popup.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TicTacToe/app/src/main/res/layout/activity_game.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TicTacToe/app/src/main/res/layout/activity_login.xml" value="0.20052083333333334" />

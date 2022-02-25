@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/custom_popup"
+    android:backgroundTint="@color/design_default_color_secondary_variant"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -11,31 +13,49 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="GAME OVER"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationGameOver"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginTop="10dp"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="winner.json"
-            app:lottie_loop="false"/>
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/winner" />
 
         <TextView
             android:id="@+id/txtVPlayerPoints"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="0 puntos"
             android:textSize="30dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtVPlayerInfo"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="PLayer info"
             android:textSize="20dp"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnContinueGameDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Continue" />
 
     </LinearLayout>
 

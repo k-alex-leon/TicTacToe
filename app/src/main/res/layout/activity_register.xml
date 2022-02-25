@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:padding="10dp"
     android:background="@drawable/custom_popup"
+    android:backgroundTint="@color/design_default_color_secondary_variant"
     tools:context=".activity.RegisterActivity">
 
 <ProgressBar
@@ -16,72 +19,100 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imgGoBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="left|top"
-            android:src="@drawable/ic_arrow_go_back"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etxtUsername"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:inputType="textEmailAddress"
-                    android:hint="User name"/>
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etxtEmail"
-                    android:layout_marginTop="20dp"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etxtUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:inputType="textEmailAddress"
+                        android:hint="User name"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="Email adress"/>
+                    android:textColorHint="@color/white"
+                    android:layout_marginTop="20dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etxtPassword"
-                    android:layout_marginTop="20dp"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etxtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:backgroundTint="@color/white"
+                        android:textColor="@color/white"
+                        android:hint="Email adress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="Password"/>
+                    android:textColorHint="@color/white"
+                    android:layout_marginTop="20dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etxtConfirmPassword"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="100dp"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etxtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:inputType="textPassword"
+                        android:hint="Password"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="Confirm Password"/>
+                    android:textColorHint="@color/white"
+                    android:layout_marginTop="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etxtConfirmPassword"
+                        android:layout_marginBottom="100dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:textColor="@color/white"
+                        android:inputType="textPassword"
+                        android:hint="Confirm Password"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
-
-
 
         <Button
             android:id="@+id/btnRegisterUser"
             android:layout_gravity="bottom"
-            android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:backgroundTint="@color/lightGreen"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/gray"
             android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:text="Register"/>
@@ -90,7 +121,13 @@
 
     </ScrollView>
 
-
+    <ImageView
+        android:id="@+id/imgGoBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="left|top"
+        android:src="@drawable/ic_arrow_go_back_white"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

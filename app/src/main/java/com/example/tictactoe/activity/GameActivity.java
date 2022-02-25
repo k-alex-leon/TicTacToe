@@ -1,32 +1,27 @@
 package com.example.tictactoe.activity;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.tictactoe.databinding.ActivityGameBinding;
 import com.example.tictactoe.models.Move;
 import com.example.tictactoe.models.User;
 import com.example.tictactoe.providers.AuthProvider;
 import com.example.tictactoe.providers.GamesProvider;
 import com.example.tictactoe.providers.UsersProvider;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.tictactoe.R;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,9 +34,6 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityGameBinding binding;
-
     GamesProvider mGameProvider;
     AuthProvider mAuthProvider;
     UsersProvider mUsersProvider;
@@ -49,8 +41,10 @@ public class GameActivity extends AppCompatActivity {
     List<ImageView> cells;
     TextView tvPlayer1, tvPlayer2;
 
-    String idGame, playerOneName, playerTwoName, idWinner;
-    boolean turn;
+    String mIdGame, mPlayerOneName,
+            mPlayerTwoName, mIdWinner;
+
+    boolean mTurn;
     Move game;
     User userPlayerOne, userPlayerTwo;
 
@@ -61,23 +55,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityGameBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_game);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        setContentView(R.layout.activity_game);
 
         mGameProvider = new GamesProvider();
         mAuthProvider = new AuthProvider();
@@ -98,14 +76,7 @@ public class GameActivity extends AppCompatActivity {
         cells.add((ImageView) findViewById(R.id.imgV8));
 
         Bundle extra = getIntent().getExtras();
-        idGame = extra.getString("idGame");
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_game);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        mIdGame = extra.getString("idGame");
     }
 
     @Override
@@ -115,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gameListener() {
-        listenerMoves = mGameProvider.getGame(idGame).addSnapshotListener(GameActivity.this, new EventListener<DocumentSnapshot>() {
+        listenerMoves = mGameProvider.getGame(mIdGame).addSnapshotListener(GameActivity.this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null){
@@ -129,7 +100,7 @@ public class GameActivity extends AppCompatActivity {
                 if (value != null){
                     // convierte docsnapshot a objeto jugada
                     game = value.toObject(Move.class);
-                    if (playerOneName == null || playerTwoName == null){
+                    if (mPlayerOneName == null || mPlayerTwoName == null){
                         getPlayerNames();
                     }
                     
@@ -143,7 +114,7 @@ public class GameActivity extends AppCompatActivity {
 
     // cambiando color de jugador segun el turno
     private void changePlayerColor() {
-        if (turn){
+        if (mTurn){
             tvPlayer2.setTextColor(Color.GRAY);
             tvPlayer1.setTextColor(Color.GREEN);
         }else{
@@ -152,8 +123,8 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (game.getIdWinner() != null){
-            idWinner = game.getIdWinner();
-            showAlertDialog();
+            mIdWinner = game.getIdWinner();
+            showGameOverAlertDialog();
         }
 
     }
@@ -172,7 +143,7 @@ public class GameActivity extends AppCompatActivity {
             }else if (cell == 1){
                 imgVCell.setImageResource(R.drawable.ic_x);
             }else if (cell == 2){
-                imgVCell.setImageResource(R.drawable.ic_o);
+                imgVCell.setImageResource(R.drawable.ic_circle);
             }
         }
 
@@ -189,8 +160,8 @@ public class GameActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 // obteniendo en objeto user todos los datos del usuario
                 userPlayerOne = documentSnapshot.toObject(User.class);
-                playerOneName = documentSnapshot.get("username").toString();
-                tvPlayer1.setText(playerOneName);
+                mPlayerOneName = documentSnapshot.get("username").toString();
+                tvPlayer1.setText(mPlayerOneName);
             }
         });
 
@@ -202,8 +173,8 @@ public class GameActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 // obteniendo en objeto user todos los datos del usuario
                 userPlayerTwo = documentSnapshot.toObject(User.class);
-                playerTwoName = documentSnapshot.get("username").toString();
-                tvPlayer2.setText(playerTwoName);
+                mPlayerTwoName = documentSnapshot.get("username").toString();
+                tvPlayer2.setText(mPlayerTwoName);
             }
         });
     }
@@ -222,13 +193,13 @@ public class GameActivity extends AppCompatActivity {
         if (game.getIdWinner() != null){
             Toast.makeText(this, "Game over", Toast.LENGTH_SHORT).show();
         }else{
-            turn = game.getGameTurn();
-            if (turn && game.getGamer1id().equals(mAuthProvider.getUid())){
+            mTurn = game.getGameTurn();
+            if (mTurn && game.getGamer1id().equals(mAuthProvider.getUid())){
                 // juega player 1
-                //llamaos al tag de los imageview seleccionados
+                //llamamos al tag de los imageview seleccionados
                 updateGame(view.getTag().toString());
             }
-            else if(!turn && game.getGamer2id().equals(mAuthProvider.getUid())){
+            else if(!mTurn && game.getGamer2id().equals(mAuthProvider.getUid())){
                 // juega player 2
                 updateGame(view.getTag().toString());
             }
@@ -245,33 +216,34 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "Select a free cell", Toast.LENGTH_SHORT).show();
         }else {
 
-            if (turn) {
+            if (mTurn) {
                 cells.get(cellPosition).setImageResource(R.drawable.ic_x);
                 // pasamos valor de 1 al campo seleccionado por player 1
                 game.getSelectCells().set(cellPosition, 1);
             } else {
-                cells.get(cellPosition).setImageResource(R.drawable.ic_o);
+                cells.get(cellPosition).setImageResource(R.drawable.ic_circle);
                 // pasamos valor de 1 al campo seleccionado por player 1
                 game.getSelectCells().set(cellPosition, 2);
             }
 
-            if (testresult()){
+            if (testResult()){
                 game.setIdWinner(mAuthProvider.getUid());
+
+                if (!mAuthProvider.getUid().equals(game.getGamer2id())){
+                    game.setIdLoser(game.getGamer2id());
+                }else if (!mAuthProvider.getUid().equals(game.getGamer1id())){
+                    game.setIdLoser(game.getGamer1id());
+                }
             }else if (testTie()){
                 game.setIdWinner("TIE");
             }
 
 
-            game.setGameTurn(!turn);
+            game.setGameTurn(!mTurn);
 
             // actualizar datos de partida
 
-            mGameProvider.setGame(idGame, game).addOnSuccessListener(GameActivity.this, new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-
-                }
-            });
+            mGameProvider.setGame(mIdGame, game);
 
         }
     }
@@ -294,9 +266,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     // verificando si ya existe un ganador
-    public boolean testresult(){
+    public boolean testResult(){
         boolean existResult = false;
-
 
             List<Integer> selectCells = game.getSelectCells();
 
@@ -352,58 +323,6 @@ public class GameActivity extends AppCompatActivity {
         return existResult;
     }
 
-    public void showAlertDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-
-        View view = getLayoutInflater().inflate(R.layout.gameover_dialog, null);
-        // obteniendo referencias del layout
-        TextView tvPoints = view.findViewById(R.id.txtVPlayerPoints);
-        TextView tvPlayerInfo = view.findViewById(R.id.txtVPlayerInfo);
-        LottieAnimationView gameOverAnimation = view.findViewById(R.id.animationGameOver);
-
-        builder.setTitle("GAME OVER");
-        // no permite que el usuario pueda quitar la alerta
-        builder.setCancelable(false);
-        // pasamos el layout que ve el usuario
-        builder.setView(view);
-
-        //si la partida resulta en empate
-        if (idWinner.equals("TIE")){
-            updatePlayerPoints(1);
-            gameOverAnimation.setAnimation("action_sword.json");
-            tvPoints.setText("+1 points");
-            if (game.getGamer1id().equals(mAuthProvider.getUid())){
-                tvPlayerInfo.setText(playerOneName +" tie with "+ playerTwoName);
-            }else{
-                tvPlayerInfo.setText(playerTwoName +" tie with "+ playerOneName);
-            }
-
-        }
-        // jugador ganador
-        else if (idWinner.equals(mAuthProvider.getUid())){
-            updatePlayerPoints(3);
-            tvPlayerInfo.setText("You win!");
-            tvPoints.setText("+3 points");
-        }
-        // jugador perdedor
-        else{
-            updatePlayerPoints(0);
-            tvPlayerInfo.setText("You lose!");
-            tvPoints.setText("0 points");
-            gameOverAnimation.setAnimation("warning.json");
-        }
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     private void updatePlayerPoints(int points) {
         User updatePlayer = null;
         if (mAuthProvider.getUid().equals(userPlayerOne.getId())){
@@ -422,9 +341,66 @@ public class GameActivity extends AppCompatActivity {
         mUsersProvider.setPoints(updatePlayer).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-
                 // Por ahora no es necesario realizar ninguna accion
+            }
+        });
 
+    }
+
+    /*
+     *   GAME OVER DIALOG
+     * */
+
+    public void showGameOverAlertDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.gameover_dialog, null);
+
+        // no permite que el usuario pueda quitar la alerta
+        builder.setCancelable(false);
+        // pasamos el layout que ve el usuario
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        // obteniendo referencias del layout
+        TextView tvPoints = view.findViewById(R.id.txtVPlayerPoints);
+        TextView tvPlayerInfo = view.findViewById(R.id.txtVPlayerInfo);
+        LottieAnimationView gameOverAnimation = view.findViewById(R.id.animationGameOver);
+        Button btnContinueGameDialog = view.findViewById(R.id.btnContinueGameDialog);
+
+        //si la partida resulta en empate
+        if (mIdWinner.equals("TIE")){
+            updatePlayerPoints(1);
+            gameOverAnimation.setAnimation(R.raw.action_sword);
+            tvPoints.setText("+1 points");
+            if (game.getGamer1id().equals(mAuthProvider.getUid())){
+                tvPlayerInfo.setText(mPlayerOneName +" tie with "+ mPlayerTwoName);
+            }else{
+                tvPlayerInfo.setText(mPlayerTwoName +" tie with "+ mPlayerOneName);
+            }
+
+        }
+        // jugador ganador
+        else if (mIdWinner.equals(mAuthProvider.getUid())){
+            updatePlayerPoints(3);
+            tvPlayerInfo.setText("You win!");
+            tvPoints.setText("+3 points");
+        }
+        // jugador perdedor
+        else{
+            updatePlayerPoints(0);
+            tvPlayerInfo.setText("You lose!");
+            tvPoints.setText("0 points");
+            gameOverAnimation.setAnimation(R.raw.sad_face);
+        }
+
+        btnContinueGameDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finish();
             }
         });
 

@@ -8,6 +8,8 @@ import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.regex.Pattern;
+
 public class GamesProvider {
 
     private CollectionReference mCollection;
@@ -35,8 +37,32 @@ public class GamesProvider {
         return mCollection.document(idGame);
     }
 
-    public Query getByIdGame(String idGame){
-        return mCollection.whereEqualTo(FieldPath.documentId(), idGame);
+    public Query getGameIdPlayer1(String idPlayer){
+        return mCollection.whereEqualTo("gamer1id", idPlayer);
+    }
+
+    public Query getGameList(String idPlayer){
+        return mCollection.whereEqualTo("gamer1id", idPlayer);
+    }
+
+    public Query getGameIdPlayer2(String idPlayer){
+        return mCollection.whereEqualTo("gamer2id", idPlayer);
+    }
+
+    public Query getGameTieIdPlayer1(String idPlayer){
+        return mCollection.whereEqualTo("gamer1id", idPlayer).whereEqualTo("idWinner", "TIE");
+    }
+
+    public Query getGameTieIdPlayer2(String idPlayer){
+        return mCollection.whereEqualTo("gamer2id", idPlayer).whereEqualTo("idWinner", "TIE");
+    }
+
+    public Query getGameWinId(String idPlayer){
+        return mCollection.whereEqualTo("idWinner", idPlayer);
+    }
+
+    public Query getGameLoseId(String idPlayer){
+        return mCollection.whereEqualTo("idLoser", idPlayer);
     }
 
     public Query getGameByPlayers(){

@@ -11,80 +11,60 @@
         android:id="@+id/toolbar"/>
 
     <LinearLayout
-        android:id="@+id/contentLoading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:gravity="center">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationGameLoading"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            app:lottie_fileName="game_loading.json"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"/>
-
-        <TextView
-            android:id="@+id/tvLoadingGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loading game..."/>
-
-        <ProgressBar
-            android:id="@+id/pbLoadingGame"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnCancelGame"
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"/>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
         android:id="@+id/contentLobbyGame"
-        android:layout_marginTop="55dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginTop="55dp"
         android:gravity="center|top"
-        android:paddingTop="20dp"
+        android:orientation="vertical"
         android:paddingLeft="20dp"
+        android:paddingTop="20dp"
         android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="POINTS"
+                android:textSize="20dp"
+                android:layout_gravity="left"/>
+
+            <TextView
+                android:id="@+id/txtVPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imgVTicTacToe"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/triqui"/>
+            android:src="@drawable/tictactoelogo" />
 
 
         <Button
             android:id="@+id/btnFindGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Find game"
-            android:drawableLeft="@drawable/ic_game_asset"/>
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_game_asset"
+            android:text="Find game" />
 
         <Button
             android:id="@+id/btnSeeScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="see score"
-            android:drawableLeft="@drawable/ic_list_score"/>
+            android:drawableLeft="@drawable/ic_list_score"
+            android:text="see games" />
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

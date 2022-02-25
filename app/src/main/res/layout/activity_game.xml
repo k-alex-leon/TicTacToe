@@ -6,19 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.GameActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.TicTacToe.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.TicTacToe.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_game" />
 
@@ -29,6 +17,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_logout" />
+        android:src="@drawable/ic_logout"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
