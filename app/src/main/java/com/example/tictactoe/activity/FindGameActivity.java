@@ -191,7 +191,7 @@ public class FindGameActivity extends AppCompatActivity {
                         });
 
                     }else{
-                        // si no encuentra partida, crea una
+                        // si no encuentra partida crea una
                         txtVTitleGameDialog.setText("Could not find a game");
                         createGame();
                     }
@@ -283,7 +283,7 @@ public class FindGameActivity extends AppCompatActivity {
         CircleImageView cImgVTieGames, cImgVWinGames,
                 cImgVLoseGames;
 
-        ImageView imgVCloseListDialog, imgVRefreshListDialog;
+        ImageView imgVCloseListDialog;
 
         RecyclerView recyclerViewListGames;
 
@@ -292,7 +292,6 @@ public class FindGameActivity extends AppCompatActivity {
         cImgVLoseGames = view.findViewById(R.id.cImgVLoseGames);
 
         imgVCloseListDialog = view.findViewById(R.id.imgVCloseListDialog);
-        imgVRefreshListDialog = view.findViewById(R.id.imgVRefreshListDialog);
 
         recyclerViewListGames = view.findViewById(R.id.recyclerListGames);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -328,10 +327,8 @@ public class FindGameActivity extends AppCompatActivity {
         cImgVLoseGames.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 query = mGamesProvider.getGameLoseId(mAuthProvider.getUid());
                 searchGames(query, recyclerViewListGames);
-
             }
         });
 
@@ -343,40 +340,7 @@ public class FindGameActivity extends AppCompatActivity {
             }
         });
 
-        imgVRefreshListDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Query firstQuery = mGamesProvider.getGameIdPlayer2(mAuthProvider.getUid());
-
-                firstQuery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (queryDocumentSnapshots.size() >= 1){
-                            searchGames(firstQuery, recyclerViewListGames);
-                        }else{
-                            Query secondQuery = mGamesProvider.getGameIdPlayer1(mAuthProvider.getUid());
-                            searchGames(secondQuery, recyclerViewListGames);
-                        }
-                    }
-                });
-
-            }
-        });
-
-        Query firstQuery = mGamesProvider.getGameIdPlayer2(mAuthProvider.getUid());
-
-        firstQuery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (queryDocumentSnapshots.size() >= 1){
-                    searchGames(firstQuery, recyclerViewListGames);
-                }else{
-                    Query secondQuery = mGamesProvider.getGameIdPlayer1(mAuthProvider.getUid());
-                    searchGames(secondQuery, recyclerViewListGames);
-                }
-            }
-        });
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -412,10 +376,46 @@ public class FindGameActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.logOut:
-                logout();
+                showConfirmExitDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // si el usuario quiere salir de su cuenta advierte antes de continuar
+    private void showConfirmExitDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.exit_dialog, null);
+        builder.setView(view);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+        Button btnCancelExit, btnAcceptExit;
+        TextView txtVTitleExitDialog;
+
+        txtVTitleExitDialog = view.findViewById(R.id.txtVTitleExitDialog);
+        txtVTitleExitDialog.setText("Do you want to log out of your account?");
+
+        btnCancelExit = view.findViewById(R.id.btnCancelExit);
+        btnCancelExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnAcceptExit = view.findViewById(R.id.btnAcceptExit);
+        btnAcceptExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                logout();
+            }
+        });
+
     }
 
     private void logout() {

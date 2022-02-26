@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tictactoe.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -40,6 +41,8 @@ public class GameActivity extends AppCompatActivity {
 
     List<ImageView> cells;
     TextView tvPlayer1, tvPlayer2;
+
+    FloatingActionButton mFab;
 
     String mIdGame, mPlayerOneName,
             mPlayerTwoName, mIdWinner;
@@ -61,6 +64,14 @@ public class GameActivity extends AppCompatActivity {
         mAuthProvider = new AuthProvider();
         mUsersProvider = new UsersProvider();
 
+        mFab = findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showConfirmExitDialog();
+            }
+        });
+
         tvPlayer1 = findViewById(R.id.txtVPlayer1);
         tvPlayer2 = findViewById(R.id.txtVPlayer2);
 
@@ -77,6 +88,49 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle extra = getIntent().getExtras();
         mIdGame = extra.getString("idGame");
+    }
+
+    /*
+    *   ALERTDIALOG
+    * */
+
+    private void showConfirmExitDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.exit_dialog, null);
+        builder.setView(view);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+        Button btnCancelExit, btnAcceptExit;
+        TextView txtVTitleExitDialog;
+
+        txtVTitleExitDialog = view.findViewById(R.id.txtVTitleExitDialog);
+        txtVTitleExitDialog.setText("You want leave the game?");
+
+        btnCancelExit = view.findViewById(R.id.btnCancelExit);
+        btnCancelExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnAcceptExit = view.findViewById(R.id.btnAcceptExit);
+        btnAcceptExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                if (mAuthProvider.getUid().equals(game.getGamer1id())){
+                    mGameProvider.updateLeavePlayer(game.getIdGame(), mAuthProvider.getUid(), game.getGamer2id());
+                }else{
+                    mGameProvider.updateLeavePlayer(game.getIdGame(), mAuthProvider.getUid(), game.getGamer1id());
+                }
+            }
+        });
+
     }
 
     @Override
